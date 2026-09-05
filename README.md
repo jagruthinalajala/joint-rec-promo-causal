@@ -2,8 +2,7 @@
 
 Reproducibility package for:
 
-**"Quantifying the Revenue Degradation of Decoupled Recommendation 
-and Promotion Systems: A Joint Causal Framework"**  
+**"Quantifying the Revenue Degradation of Decoupled Recommendation and Promotion Systems: A Joint Causal Framework"**
 Jagruthi Nalajala — submitted to ACM Transactions on Recommender Systems
 
 ---
@@ -30,8 +29,8 @@ Jagruthi Nalajala — submitted to ACM Transactions on Recommender Systems
 ---
 
 ## Requirements
----
 
+```
 python==3.10
 numpy==1.24.3
 pandas==2.0.2
@@ -40,25 +39,22 @@ xgboost==1.7.6
 matplotlib==3.7.2
 seaborn==0.12.2
 jupyter==1.0.0
+```
 
 ---
+
 ## How to Reproduce
 
-1. **Primary simulation** (Tables 2, 3, 4 and Figures 2, 4, 5):  
-   Open `nalajala2026_simulation.ipynb`. Set the `SWEEP` variable at the top to `'lambda'`, `'beta'`, or `'rho'` and run all cells.
+1. **Primary simulation** (Tables 2, 3, 4 and Figures 2, 4, 5): Open `nalajala2026_simulation.ipynb`. Set the `SWEEP` variable at the top to `lambda`, `beta`, or `rho` and run all cells.
 
-2. **Dunnhumby validation** (Table 7):  
-   Download the Dunnhumby Complete Journey dataset from [dunnhumby.com/source-files](https://www.dunnhumby.com/source-files/). Place all CSV files in the same folder, then run `nalajala2026_dunnhumby.ipynb`.
+2. **Dunnhumby validation** (Table 7): Download the Dunnhumby Complete Journey dataset from [dunnhumby.com/source-files](https://www.dunnhumby.com/source-files/). Place all CSV files in the same folder, then run `nalajala2026_dunnhumby.ipynb`.
 
-3. **OPE evaluation** (Table 8):  
-   Run `nalajala2026_observational_ope.ipynb` with no additional data required.
+3. **OPE evaluation** (Table 8): Run `nalajala2026_observational_ope.ipynb` with no additional data required.
 
-4. **Figures**:  
-   Run `nalajala2026_figures.ipynb` to regenerate all figures from the result CSVs.
+4. **Figures**: Run `nalajala2026_figures.ipynb` to regenerate all figures from the result CSVs.
 
 ---
 
 ## Data Availability
 
-This repository will be made fully public upon paper acceptance.  
-The Dunnhumby Complete Journey dataset is publicly available at [dunnhumby.com/source-files](https://www.dunnhumby.com/source-files/).
+This repository will be made fully public upon paper acceptance. The Dunnhumby Complete Journey dataset is publicly available at [dunnhumby.com/source-files](https://www.dunnhumby.com/source-files/).
