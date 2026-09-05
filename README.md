@@ -30,8 +30,8 @@ Jagruthi Nalajala — submitted to ACM Transactions on Recommender Systems
 ---
 
 ## Requirements
+---
 
-```
 python==3.10
 numpy==1.24.3
 pandas==2.0.2
@@ -40,8 +40,8 @@ xgboost==1.7.6
 matplotlib==3.7.2
 seaborn==0.12.2
 jupyter==1.0.0
----
 
+---
 ## How to Reproduce
 
 1. **Primary simulation** (Tables 2, 3, 4 and Figures 2, 4, 5):  
