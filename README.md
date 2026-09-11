@@ -1,59 +1,68 @@
 # Joint Recommendation and Promotion Causal Framework
 
-Reproducibility package for:
+Reproducibility package for the manuscript:
 
-**"Quantifying the Revenue Degradation of Decoupled Recommendation and Promotion Systems: A Joint Causal Framework"**
-Jagruthi Nalajala — submitted to ACM Transactions on Recommender Systems
+> Jagruthi Nalajala. *Quantifying the Revenue Degradation of Decoupled Recommendation and Promotion Systems: A Joint Causal Framework.*
 
----
+## Scope
 
-## Repository Contents
+The experiments use (1) fully synthetic potential-outcomes simulations, (2) a semi-synthetic calibration based on public Dunnhumby Complete Journey data, and (3) a fully synthetic logged-data policy-evaluation simulation. No proprietary retailer data are included or required.
 
-| File | Description |
-|------|-------------|
-| `nalajala2026_simulation.ipynb` | Primary synthetic simulation (lambda, beta, rho sweeps) |
-| `nalajala2026_dunnhumby.ipynb` | Semi-synthetic validation on Dunnhumby dataset |
-| `nalajala2026_figures.ipynb` | Generates all 5 paper figures from result CSVs |
-| `nalajala2026_observational_ope.ipynb` | Logged-data OPE simulation (DM vs DR evaluation) |
-| `results_lambda.csv` | Results for Table 2 (interaction strength sweep) |
-| `results_beta.csv` | Results for Table 3 (budget tightness sweep) |
-| `results_rho.csv` | Results for Table 4 (personalization sweep) |
-| `results_dunnhumby.csv` | Results for Table 7 (Dunnhumby bootstrap) |
-| `results_observational_ope.csv` | Results for Table 8 (OPE evaluation) |
-| `figure1_gap_curve.png` | Figure 1: Revenue gap curve across targeting fractions |
-| `figure2_gap_by_lambda.png` | Figure 2: Revenue gap by interaction strength |
-| `figure3_interference_bias.png` | Figure 3: Recommendation-mediated bias |
-| `figure4_gap_by_beta.png` | Figure 4: Revenue gap by budget tightness |
-| `figure5_gap_by_rho.png` | Figure 5: Revenue gap by personalization level |
+The Dunnhumby analysis does **not** estimate a causal effect from observed transactions. It uses observed household covariates and spending patterns to calibrate a simulated response surface; see the manuscript and notebook for details.
 
----
+## Repository map
 
-## Requirements
+| Manuscript result | Source | Saved output |
+| --- | --- | --- |
+| Interaction, budget, and personalization sweeps (Tables 2--4; Figures 2, 4, and 5) | `nalajala2026_simulation.ipynb` | `results_lambda.csv`, `results_beta.csv`, `results_rho.csv` |
+| Semi-synthetic Dunnhumby calibration (Table 7) | `nalajala2026_dunnhumby.ipynb` | `results_dunnhumby.csv` |
+| Logged-data direct-method and doubly robust evaluation (Table 8) | `nalajala2026_observational_ope.ipynb` | `results_observational_ope.csv` |
+| Revised factual-outcome policy-learning comparison | `experiments/run_logged_policy_learning.py` | `results_logged_policy_learning.csv` |
+| All manuscript figures | `nalajala2026_figures.ipynb` | `figure1_gap_curve.png` through `figure5_gap_by_rho.png` |
 
-```
-python==3.10
-numpy==1.24.3
-pandas==2.0.2
-scikit-learn==1.3.0
-xgboost==1.7.6
-matplotlib==3.7.2
-seaborn==0.12.2
-jupyter==1.0.0
+The committed CSVs and PNGs are the outputs used to prepare the manuscript. They allow the figures and summary tables to be inspected without rerunning the simulations.
+
+## Environment
+
+Create an isolated Python 3.10 environment and install the pinned dependencies:
+
+```bash
+python3.10 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
----
+The notebooks are intended to run on CPU. No GPU is required. The first full synthetic sweep may take substantial time because it evaluates 20 independent seeds at five parameter values.
 
-## How to Reproduce
+## Reproduction order
 
-1. **Primary simulation** (Tables 2, 3, 4 and Figures 2, 4, 5): Open `nalajala2026_simulation.ipynb`. Set the `SWEEP` variable at the top to `lambda`, `beta`, or `rho` and run all cells.
+1. Run `nalajala2026_simulation.ipynb` once for each `SWEEP` setting: `lambda`, `beta`, and `rho`.
+2. Run `nalajala2026_observational_ope.ipynb`.
+3. Follow `docs/dunnhumby_data_setup.md`, then run `nalajala2026_dunnhumby.ipynb`.
+4. Run `nalajala2026_figures.ipynb` after the three synthetic result CSVs are present.
 
-2. **Dunnhumby validation** (Table 7): Download the Dunnhumby Complete Journey dataset from [dunnhumby.com/source-files](https://www.dunnhumby.com/source-files/). Place all CSV files in the same folder, then run `nalajala2026_dunnhumby.ipynb`.
+The revised learned-policy sensitivity study is run separately with:
 
-3. **OPE evaluation** (Table 8): Run `nalajala2026_observational_ope.ipynb` with no additional data required.
+```bash
+bash experiments/run_revised_grid.sh
+```
 
-4. **Figures**: Run `nalajala2026_figures.ipynb` to regenerate all figures from the result CSVs.
+Its pre-specified design and interpretation rule are documented in `docs/revised_empirical_plan.md`.
 
----
+For a first check, inspect the committed CSVs and run the figure notebook. Exact parameter grids, seeds, model settings, output names, and expected row counts are recorded in `docs/reproduction_manifest.md`.
 
-## Data Availability
-The Dunnhumby Complete Journey dataset is publicly available at [dunnhumby.com/source-files](https://www.dunnhumby.com/source-files/).
+## Data availability
+
+The Dunnhumby Complete Journey source files must be obtained by each user from the data provider under its terms. They are not redistributed in this repository. The required filenames and directory layout are documented in `docs/dunnhumby_data_setup.md`.
+
+## Reproducibility notes
+
+- All simulation seeds, split rules, parameter grids, and model hyperparameters are visible in the notebooks and summarized in the reproduction manifest.
+- The primary experiments use 20 independent simulation seeds; reported synthetic intervals are standard deviations across seeds, not confidence intervals.
+- The Dunnhumby calibration uses 500 out-of-bag bootstrap resamples of 801 eligible households.
+- Hardware, runtime, and clean-environment verification will be recorded in the GitHub release accompanying a revised submission.
+
+## Citation
+
+See `CITATION.cff` for citation metadata. A release DOI should be added here after the repository is archived.

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this code or its results, please cite the associated manuscript."
+title: "Joint Recommendation and Promotion Causal Framework"
+authors:
+  - family-names: Nalajala
+    given-names: Jagruthi
+type: software
+date-released: 2026-09-11
+repository-code: "https://github.com/jagruthinalajala/joint-rec-promo-causal"
+abstract: "Code and result artifacts for simulations studying joint versus decoupled recommendation and promotion optimization."
