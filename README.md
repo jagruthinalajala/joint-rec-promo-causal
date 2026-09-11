@@ -56,5 +56,4 @@ jupyter==1.0.0
 ---
 
 ## Data Availability
-
-This repository will be made fully public upon paper acceptance. The Dunnhumby Complete Journey dataset is publicly available at [dunnhumby.com/source-files](https://www.dunnhumby.com/source-files/).
+The Dunnhumby Complete Journey dataset is publicly available at [dunnhumby.com/source-files](https://www.dunnhumby.com/source-files/).
