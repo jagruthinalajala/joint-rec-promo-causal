@@ -17,7 +17,7 @@ The Dunnhumby analysis does **not** estimate a causal effect from observed trans
 | Interaction, budget, and personalization sweeps (Tables 2--4; Figures 2, 4, and 5) | `nalajala2026_simulation.ipynb` | `results_lambda.csv`, `results_beta.csv`, `results_rho.csv` |
 | Semi-synthetic Dunnhumby calibration (Table 7) | `nalajala2026_dunnhumby.ipynb` | `results_dunnhumby.csv` |
 | Logged-data direct-method and doubly robust evaluation (Table 8) | `nalajala2026_observational_ope.ipynb` | `results_observational_ope.csv` |
-| Revised factual-outcome policy-learning comparison | `experiments/run_logged_policy_learning.py` | `results_logged_policy_learning.csv` |
+| Factual-outcome policy-learning comparison (Table 9) | `experiments/run_logged_policy_learning.py` and `experiments/run_revised_grid.sh` | `results/revised_grid/revised_grid_summary.csv` and the 15 condition-level CSV files in `results/revised_grid/` |
 | All manuscript figures | `nalajala2026_figures.ipynb` | `figure1_gap_curve.png` through `figure5_gap_by_rho.png` |
 
 The committed CSVs and PNGs are the outputs used to prepare the manuscript. They allow the figures and summary tables to be inspected without rerunning the simulations.
@@ -61,7 +61,7 @@ The Dunnhumby Complete Journey source files must be obtained by each user from t
 - All simulation seeds, split rules, parameter grids, and model hyperparameters are visible in the notebooks and summarized in the reproduction manifest.
 - The primary experiments use 20 independent simulation seeds; reported synthetic intervals are standard deviations across seeds, not confidence intervals.
 - The Dunnhumby calibration uses 500 out-of-bag bootstrap resamples of 801 eligible households.
-- Hardware, runtime, and clean-environment verification will be recorded in the GitHub release accompanying a revised submission.
+- The factual-outcome comparison reports approximate 95% confidence intervals for pairwise policy-value differences across 20 independent simulation replicates. Results should be interpreted conditionally: joint learning can outperform the decoupled learner under sufficiently strong interactions, but it is not uniformly superior to the pooled additive baseline.
 
 ## Citation
 
